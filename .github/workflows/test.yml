@@ -1,0 +1,53 @@
+on:
+  - push
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Testing with Erlang/OTP ${{ matrix.otp }}
+
+    env:
+      REBAR_PROFILE: test
+
+    strategy:
+      fail-fast: false
+      matrix:
+        otp: ["26.1", "25.3.2.6"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Erlang
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ matrix.otp }}
+          rebar3-version: "3.22.1"
+          version-type: strict
+          install-hex: false
+
+      - name: Restore Cache
+        uses: actions/cache@v3
+        with:
+          path: _build
+          key: erlang-${{ matrix.otp }}-${{ hashFiles('**/rebar.lock') }}-build
+
+      - name: Compile Project
+        run: rebar3 compile
+
+      - name: Check Formatting
+        run: rebar3 fmt --check
+
+      - name: Run Dialyzer
+        run: rebar3 dialyzer
+
+      - name: Run XRef
+        run: rebar3 xref
+
+      - name: Run Tests
+        run: rebar3 eunit
+
+      - name: Upload Coverage Reports
+        run: rebar3 coveralls send
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
