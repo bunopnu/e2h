@@ -1,5 +1,5 @@
 {application, e2h, [
-    {description, "An OTP library"},
+    {description, "Erlang to HTML generator"},
     {vsn, "0.1.0"},
     {registered, []},
     {applications, [
@@ -10,5 +10,5 @@
     {modules, []},
 
     {licenses, ["MIT"]},
-    {links, []}
+    {links, [{"GitHub", "https://github.com/bunopnu/e2h"}]}
 ]}.
