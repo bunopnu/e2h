@@ -1,18 +1,93 @@
+%%%-----------------------------------------------------------------------------
+%%% @doc Erlang to HTML generator.
+%%%
+%%% `e2h' is an Erlang module designed to generate HTML within the Erlang
+%%% ecosystem, allowing Erlang developers to efficiently create HTML documents
+%%% and elements from structured data.
+%%% @author bunopnu
+%%% @end
+%%%-----------------------------------------------------------------------------
 -module(e2h).
 
 -export([render/1, escape/1]).
 -export_type([attributes/0, elements/0]).
 
--type attributes() :: [{binary(), binary()}].
--type elements() :: [{binary(), attributes(), elements()} | binary()].
+%%%=============================================================================
+%%% Public types
+%%%=============================================================================
 
+-type attributes() :: [{binary(), binary()}].
+%% Represents a list of HTML attribute-value pairs.
+%%
+%% == Example ==
+%%
+%% ```
+%% Attributes = [{<<"class">>, <<"container">>}, {<<"id">>, <<"my-element">>}].
+%% % Represents attributes like: class="container" id="my-element"
+%% '''
+%%
+
+-type elements() :: [{binary(), attributes(), elements()} | binary()].
+%% Represents structured HTML elements or raw content.
+%%
+%% == Example ==
+%%
+%% ```
+%% Elements = [
+%%  {<<"div">>, [{<<"class">>, <<"container">>}], [
+%%    {<<"p">>, [], [<<"This is a paragraph.">>]},
+%%    {<<"a">>, [{<<"href">>, <<"#">>}], [<<"Click me">>]}
+%%  ]}
+%% ].
+%% '''
+%%
+
+%%%=============================================================================
+%%% Public functions
+%%%=============================================================================
+
+%%------------------------------------------------------------------------------
+%% @doc Renders a list of structure into a binary representation of an
+%% HTML document.
+%%
+%% == Parameters ==
+%% `Elements' - A list of structure, conforming to the {@link elements()} type.
+%%
+%% == Returns ==
+%% A binary representation of the HTML document.
+%%
+%% @end
+%%------------------------------------------------------------------------------
 -spec render(elements()) -> binary().
 render(Elements) when is_list(Elements) ->
     encode_elements(Elements, <<"<!DOCTYPE html>\n">>).
 
+%%------------------------------------------------------------------------------
+%% @doc Escapes dangerous HTML characters within a binary data input.
+%%
+%% == Parameters ==
+%% `Data' - The binary data to be escaped.
+%%
+%% == Returns ==
+%% The escaped binary data.
+%%
+%% == Example ==
+%%
+%% ```
+%% Unescaped = <<"Suspicious <script>alert(1)</script> document!">>,
+%% Escaped = e2h:escape(Unescaped).
+%% % <<"Suspicious &lt;script&gt;alert(1)&lt;/script&gt; document!">>
+%% '''
+%%
+%% @end
+%%------------------------------------------------------------------------------
 -spec escape(binary()) -> binary().
 escape(Data) when is_binary(Data) ->
     escape(Data, <<>>).
+
+%%%=============================================================================
+%%% Private functions
+%%%=============================================================================
 
 -spec escape(binary(), binary()) -> binary().
 escape(<<$<, Tail/binary>>, Acc) ->
