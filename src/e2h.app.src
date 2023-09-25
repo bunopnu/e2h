@@ -1,5 +1,5 @@
 {application, e2h, [
-    {description, "Erlang to HTML generator"},
+    {description, "HTML generator for Erlang ecosystem"},
     {vsn, "0.1.0"},
     {registered, []},
     {applications, [

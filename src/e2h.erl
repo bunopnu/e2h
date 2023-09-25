@@ -1,5 +1,5 @@
 %%%-----------------------------------------------------------------------------
-%%% @doc Erlang to HTML generator.
+%%% @doc HTML generator for Erlang ecosystem.
 %%%
 %%% `e2h' is an Erlang module designed to generate HTML within the Erlang
 %%% ecosystem, allowing Erlang developers to efficiently create HTML documents
