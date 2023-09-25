@@ -1,9 +1,14 @@
 -module(e2h).
 
--export([encode_attributes/1, encode_elements/1]).
+-export([render/1]).
+-export_type([attributes/0, elements/0]).
 
 -type attributes() :: [{binary(), binary()}].
 -type elements() :: [{binary(), attributes(), elements()} | binary()].
+
+-spec render(elements()) -> binary().
+render(Elements) ->
+    encode_elements(Elements, <<"<!DOCTYPE html>\n">>).
 
 -spec encode_attributes(attributes()) -> binary().
 encode_attributes(Attributes) when is_list(Attributes) ->
