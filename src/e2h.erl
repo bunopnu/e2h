@@ -16,7 +16,10 @@
 %%% Public types
 %%%=============================================================================
 
--type attributes() :: [{binary(), binary()}].
+-type key() :: binary() | atom().
+%% Represents keys that can be either binary data or atoms.
+
+-type attributes() :: [{key(), binary()}].
 %% Represents a list of HTML attribute-value pairs.
 %%
 %% == Example ==
@@ -27,7 +30,7 @@
 %% '''
 %%
 
--type elements() :: [{binary(), attributes(), elements()} | {binary(), attributes()} | binary()].
+-type elements() :: [{key(), attributes(), elements()} | {key(), attributes()} | binary()].
 %% Represents structured HTML elements or raw content.
 %%
 %% == Example ==
@@ -37,7 +40,7 @@
 %%  {<<"div">>, [{<<"class">>, <<"container">>}], [
 %%    {<<"p">>, [], [<<"This is a paragraph.">>]},
 %%    {<<"a">>, [{<<"href">>, <<"#">>}], [<<"Click me">>]},
-%%    {<<"img">>, [{<<"src">>, <<"https://example.com/image.png">>}]}
+%%    {img, [{src, <<"https://example.com/image.png">>}]}
 %%  ]}
 %% ].
 %% '''
@@ -111,8 +114,9 @@ encode_attributes(Attributes) when is_list(Attributes) ->
     encode_attributes(Attributes, <<>>).
 
 -spec encode_attributes(attributes(), binary()) -> binary().
-encode_attributes([{Key, Value} | Tail], Acc) when is_binary(Key), is_binary(Value) ->
-    EncodedAttribute = <<$\s, Key/binary, "=\"", Value/binary, $">>,
+encode_attributes([{Key, Value} | Tail], Acc) when is_binary(Value) ->
+    EncodedAttributeKey = encode_key(Key),
+    EncodedAttribute = <<$\s, EncodedAttributeKey/binary, "=\"", Value/binary, $">>,
     encode_attributes(Tail, <<Acc/binary, EncodedAttribute/binary>>);
 encode_attributes([], Acc) ->
     Acc.
@@ -124,16 +128,31 @@ encode_elements(Elements) when is_list(Elements) ->
 -spec encode_elements(elements(), binary()) -> binary().
 encode_elements([Raw | Tail], Acc) when is_binary(Raw) ->
     encode_elements(Tail, <<Acc/binary, Raw/binary>>);
-encode_elements([{Tag, Attributes, Value} | Tail], Acc) when is_binary(Tag) ->
-    EncodedValue = encode_elements(Value),
+encode_elements([{Tag, Attributes, Value} | Tail], Acc) ->
+    EncodedTag = encode_key(Tag),
     EncodedAttributes = encode_attributes(Attributes),
+    EncodedValue = encode_elements(Value),
     EncodedElement = <<
-        $<, Tag/binary, EncodedAttributes/binary, $>, EncodedValue/binary, "</", Tag/binary, $>
+        $<,
+        EncodedTag/binary,
+        EncodedAttributes/binary,
+        $>,
+        EncodedValue/binary,
+        "</",
+        EncodedTag/binary,
+        $>
     >>,
     encode_elements(Tail, <<Acc/binary, EncodedElement/binary>>);
-encode_elements([{Tag, Attributes} | Tail], Acc) when is_binary(Tag) ->
+encode_elements([{Tag, Attributes} | Tail], Acc) ->
+    EncodedTag = encode_key(Tag),
     EncodedAttributes = encode_attributes(Attributes),
-    EncodedElement = <<$<, Tag/binary, EncodedAttributes/binary, " />">>,
+    EncodedElement = <<$<, EncodedTag/binary, EncodedAttributes/binary, " />">>,
     encode_elements(Tail, <<Acc/binary, EncodedElement/binary>>);
 encode_elements([], Acc) ->
     Acc.
+
+-spec encode_key(key()) -> binary().
+encode_key(Tag) when is_binary(Tag) ->
+    Tag;
+encode_key(Tag) when is_atom(Tag) ->
+    atom_to_binary(Tag).

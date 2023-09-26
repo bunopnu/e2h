@@ -20,8 +20,8 @@ escape_test() ->
 simple_render_test() ->
     Elements = [
         {<<"div">>, [{<<"class">>, <<"test">>}], [
-            {<<"h1">>, [], [<<"Hello, World!">>]},
-            {<<"img">>, [{<<"src">>, <<"https://example.com/image.png">>}]}
+            {h1, [], [<<"Hello, World!">>]},
+            {img, [{src, <<"https://example.com/image.png">>}]}
         ]}
     ],
 
