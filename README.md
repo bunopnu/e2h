@@ -17,14 +17,14 @@ Package can be installed by adding `e2h` to your list of dependencies:
 ### Rebar3
 
 ```erlang
-{deps, [{e2h, "0.1.0"}]}.
+{deps, [{e2h, "0.1.1"}]}.
 ```
 
 ### Mix
 
 ```elixir
 defp deps do
-  [{:e2h, "~> 0.1.0"}]
+  [{:e2h, "~> 0.1.1"}]
 end
 ```
 
