@@ -20,10 +20,12 @@ escape_test() ->
 simple_render_test() ->
     Elements = [
         {<<"div">>, [{<<"class">>, <<"test">>}], [
-            {<<"h1">>, [], [<<"Hello, World!">>]}
+            {<<"h1">>, [], [<<"Hello, World!">>]},
+            {<<"img">>, [{<<"src">>, <<"https://example.com/image.png">>}]}
         ]}
     ],
 
     Rendered = e2h:render(Elements),
-    Expected = <<"<!DOCTYPE html>\n<div class=\"test\"><h1>Hello, World!</h1></div>">>,
+    Expected =
+        <<"<!DOCTYPE html>\n<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div>">>,
     ?assertEqual(Expected, Rendered).

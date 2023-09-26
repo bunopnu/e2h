@@ -27,7 +27,7 @@
 %% '''
 %%
 
--type elements() :: [{binary(), attributes(), elements()} | binary()].
+-type elements() :: [{binary(), attributes(), elements()} | {binary(), attributes()} | binary()].
 %% Represents structured HTML elements or raw content.
 %%
 %% == Example ==
@@ -36,7 +36,8 @@
 %% Elements = [
 %%  {<<"div">>, [{<<"class">>, <<"container">>}], [
 %%    {<<"p">>, [], [<<"This is a paragraph.">>]},
-%%    {<<"a">>, [{<<"href">>, <<"#">>}], [<<"Click me">>]}
+%%    {<<"a">>, [{<<"href">>, <<"#">>}], [<<"Click me">>]},
+%%    {<<"img">>, [{<<"src">>, <<"https://example.com/image.png">>}]}
 %%  ]}
 %% ].
 %% '''
@@ -129,6 +130,10 @@ encode_elements([{Tag, Attributes, Value} | Tail], Acc) when is_binary(Tag) ->
     EncodedElement = <<
         $<, Tag/binary, EncodedAttributes/binary, $>, EncodedValue/binary, "</", Tag/binary, $>
     >>,
+    encode_elements(Tail, <<Acc/binary, EncodedElement/binary>>);
+encode_elements([{Tag, Attributes} | Tail], Acc) when is_binary(Tag) ->
+    EncodedAttributes = encode_attributes(Attributes),
+    EncodedElement = <<$<, Tag/binary, EncodedAttributes/binary, " />">>,
     encode_elements(Tail, <<Acc/binary, EncodedElement/binary>>);
 encode_elements([], Acc) ->
     Acc.
