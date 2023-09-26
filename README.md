@@ -17,15 +17,38 @@ Package can be installed by adding `e2h` to your list of dependencies:
 ### Rebar3
 
 ```erlang
-{deps, [{e2h, "0.1.1"}]}.
+{deps, [{e2h, "0.2.0"}]}.
 ```
 
 ### Mix
 
 ```elixir
 defp deps do
-  [{:e2h, "~> 0.1.1"}]
+  [{:e2h, "~> 0.2.0"}]
 end
+```
+
+## Example
+
+```erlang
+UserStatus = <<"busy">>,
+UserProfileImage = <<"https://example.com/image.jpeg">>,
+UserName = <<"adam">>,
+UserBio = <<"some nonsense">>,
+
+Document = [
+  {'div', [{class, <<"user">>}, {status, UserStatus}], [
+    {img, [{href, UserProfileImage}]},
+    {'div', [], [
+      {h1, [], [UserName]},
+      {p, [], [UserBio]}
+    ]}
+  ]}
+],
+
+e2h:render(Document).
+% <!DOCTYPE html>
+% <div class="user" status="busy"><img href="https://example.com/image.jpeg" /><div><h1>adam</h1><p>some nonsense</p></div></div>
 ```
 
 ## Documentation

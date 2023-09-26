@@ -4,6 +4,12 @@ This changelog documents all noteworthy changes in the project. The format adher
 
 ## Next
 
+## v0.2.0 - 26th September 2023
+
+### Added
+
+- Allow passing atom for attributes and tags.
+
 ## v0.1.1 - 26th September 2023
 
 ### Added

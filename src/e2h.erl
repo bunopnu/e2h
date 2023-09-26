@@ -10,7 +10,7 @@
 -module(e2h).
 
 -export([render/1, escape/1]).
--export_type([attributes/0, elements/0]).
+-export_type([key/0, attributes/0, elements/0]).
 
 %%%=============================================================================
 %%% Public types
@@ -25,7 +25,7 @@
 %% == Example ==
 %%
 %% ```
-%% Attributes = [{<<"class">>, <<"container">>}, {<<"id">>, <<"my-element">>}].
+%% Attributes = [{class, <<"container">>}, {<<"id">>, <<"my-element">>}].
 %% % Represents attributes like: class="container" id="my-element"
 %% '''
 %%
