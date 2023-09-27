@@ -27,5 +27,5 @@ simple_render_test() ->
 
     Rendered = e2h:render(Elements),
     Expected =
-        <<"<!DOCTYPE html>\n<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div>">>,
+        <<"<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div>">>,
     ?assertEqual(Expected, Rendered).

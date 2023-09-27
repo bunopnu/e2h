@@ -9,7 +9,7 @@
 %%%-----------------------------------------------------------------------------
 -module(e2h).
 
--export([render/1, escape/1]).
+-export([render_html/1, render/1, escape/1]).
 -export_type([key/0, attributes/0, elements/0]).
 
 %%%=============================================================================
@@ -51,6 +51,14 @@
 %%%=============================================================================
 
 %%------------------------------------------------------------------------------
+%% @doc Similar to {@link render/1}, with a DOCTYPE declaration.
+%% @end
+%%------------------------------------------------------------------------------
+-spec render_html(elements()) -> binary().
+render_html(Elements) when is_list(Elements) ->
+    encode_elements(Elements, <<"<!DOCTYPE html>\n">>).
+
+%%------------------------------------------------------------------------------
 %% @doc Renders a list of structure into a binary representation of an
 %% HTML document.
 %%
@@ -64,7 +72,7 @@
 %%------------------------------------------------------------------------------
 -spec render(elements()) -> binary().
 render(Elements) when is_list(Elements) ->
-    encode_elements(Elements, <<"<!DOCTYPE html>\n">>).
+    encode_elements(Elements, <<>>).
 
 %%------------------------------------------------------------------------------
 %% @doc Escapes dangerous HTML characters within a binary data input.
