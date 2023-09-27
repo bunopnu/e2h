@@ -4,6 +4,13 @@ This changelog documents all noteworthy changes in the project. The format adher
 
 ## Next
 
+## v0.3.0 - 27th September 2023
+
+### Changed
+
+- Renamed the old `render/1` function to `render_html/1` for clarity in naming.
+- Introduced a new `render/1` function that returns HTML without the DOCTYPE declaration for flexibility in usage.
+
 ## v0.2.0 - 26th September 2023
 
 ### Added

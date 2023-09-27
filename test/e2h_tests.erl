@@ -25,7 +25,11 @@ simple_render_test() ->
         ]}
     ],
 
-    Rendered = e2h:render(Elements),
-    Expected =
+    Rendered1 = e2h:render(Elements),
+    Expected1 =
         <<"<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div>">>,
-    ?assertEqual(Expected, Rendered).
+    ?assertEqual(Expected1, Rendered1),
+
+    Rendered2 = e2h:render_html(Elements),
+    Expected2 = <<"<!DOCTYPE html>\n", Expected1/binary>>,
+    ?assertEqual(Expected2, Rendered2).
