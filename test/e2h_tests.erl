@@ -2,7 +2,9 @@
 
 -include_lib("stdlib/include/assert.hrl").
 
--export([escape_test/0, simple_render_test/0]).
+-include("include/html.hrl").
+
+-export([escape_test/0, simple_render_test/0, html_macros_render_test/0]).
 
 escape_test() ->
     Unescaped1 = <<"<script test=\"sus()\">alert(1)</script>">>,
@@ -33,3 +35,20 @@ simple_render_test() ->
     Rendered2 = e2h:render_html(Elements),
     Expected2 = <<"<!DOCTYPE html>\n", Expected1/binary>>,
     ?assertEqual(Expected2, Rendered2).
+
+html_macros_render_test() ->
+    Elements = [
+        ?eDiv([
+            ?eH1([<<"Hello, World!">>]),
+            ?eSpan([
+                ?eP([<<"Long Story...">>]),
+                ?eA(<<"https://bun.rip">>, [<<"Visit My Website!">>])
+            ]),
+            <<"End of the content!">>
+        ])
+    ],
+
+    Rendered1 = e2h:render(Elements),
+    Expected1 =
+        <<"<div><h1>Hello, World!</h1><span><p>Long Story...</p><a href=\"https://bun.rip\">Visit My Website!</a></span>End of the content!</div>">>,
+    ?assertEqual(Expected1, Rendered1).

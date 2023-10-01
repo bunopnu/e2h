@@ -4,6 +4,7 @@
 %%% `e2h' is an Erlang module designed to generate HTML within the Erlang
 %%% ecosystem, allowing Erlang developers to efficiently create HTML documents
 %%% and elements from structured data.
+%%%
 %%% @author bunopnu
 %%% @end
 %%%-----------------------------------------------------------------------------
