@@ -20,14 +20,14 @@
 -type key() :: binary() | atom().
 %% Represents keys that can be either binary data or atoms.
 
--type attributes() :: [{key(), binary()}].
+-type attributes() :: [{key(), binary()} | key()].
 %% Represents a list of HTML attribute-value pairs.
 %%
 %% == Example ==
 %%
 %% ```
-%% Attributes = [{class, <<"container">>}, {<<"id">>, <<"my-element">>}].
-%% % Represents attributes like: class="container" id="my-element"
+%% Attributes = [{<<"type">>, <<"password">>}, {id, <<"my-element">>}, disabled].
+%% % Represents attributes like: type="password" id="my-element" disabled
 %% '''
 %%
 
@@ -126,6 +126,10 @@ encode_attributes(Attributes) when is_list(Attributes) ->
 encode_attributes([{Key, Value} | Tail], Acc) when is_binary(Value) ->
     EncodedAttributeKey = encode_key(Key),
     EncodedAttribute = <<$\s, EncodedAttributeKey/binary, "=\"", Value/binary, $">>,
+    encode_attributes(Tail, <<Acc/binary, EncodedAttribute/binary>>);
+encode_attributes([Key | Tail], Acc) ->
+    EncodedAttributeKey = encode_key(Key),
+    EncodedAttribute = <<$\s, EncodedAttributeKey/binary, $">>,
     encode_attributes(Tail, <<Acc/binary, EncodedAttribute/binary>>);
 encode_attributes([], Acc) ->
     Acc.
