@@ -4,6 +4,12 @@ This changelog documents all noteworthy changes in the project. The format adher
 
 ## Next
 
+## v0.3.1 - 2nd October 2023
+
+### Added
+
+- Added macros for commonly used HTML tags.
+
 ## v0.3.0 - 27th September 2023
 
 ### Changed

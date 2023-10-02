@@ -1,6 +1,6 @@
 {application, e2h, [
     {description, "HTML generator for Erlang ecosystem"},
-    {vsn, "0.3.0"},
+    {vsn, "0.3.1"},
     {registered, []},
     {applications, [
         kernel,
