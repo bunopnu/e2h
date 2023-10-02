@@ -24,12 +24,13 @@ simple_render_test() ->
         {<<"div">>, [{<<"class">>, <<"test">>}], [
             {h1, [], [<<"Hello, World!">>]},
             {img, [{src, <<"https://example.com/image.png">>}]}
-        ]}
+        ]},
+        {button, [disabled], [<<"More">>]}
     ],
 
     Rendered1 = e2h:render(Elements),
     Expected1 =
-        <<"<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div>">>,
+        <<"<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div><button disabled>More</button>">>,
     ?assertEqual(Expected1, Rendered1),
 
     Rendered2 = e2h:render_html(Elements),

@@ -129,7 +129,7 @@ encode_attributes([{Key, Value} | Tail], Acc) when is_binary(Value) ->
     encode_attributes(Tail, <<Acc/binary, EncodedAttribute/binary>>);
 encode_attributes([Key | Tail], Acc) ->
     EncodedAttributeKey = encode_key(Key),
-    EncodedAttribute = <<$\s, EncodedAttributeKey/binary, $">>,
+    EncodedAttribute = <<$\s, EncodedAttributeKey/binary>>,
     encode_attributes(Tail, <<Acc/binary, EncodedAttribute/binary>>);
 encode_attributes([], Acc) ->
     Acc.
