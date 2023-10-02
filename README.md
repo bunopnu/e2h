@@ -13,14 +13,14 @@ Package can be installed by adding `e2h` to your list of dependencies:
 ### With Rebar3
 
 ```erlang
-{deps, [{e2h, "0.3.1"}]}.
+{deps, [{e2h, "0.3.2"}]}.
 ```
 
 ### With Mix
 
 ```elixir
 defp deps do
-  [{:e2h, "~> 0.3.1"}]
+  [{:e2h, "~> 0.3.2"}]
 end
 ```
 

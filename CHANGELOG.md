@@ -4,6 +4,12 @@ This changelog documents all noteworthy changes in the project. The format adher
 
 ## Next
 
+## v0.3.2 - 2nd October 2023
+
+### Added
+
+- Support for [boolean attributes](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes).
+
 ## v0.3.1 - 2nd October 2023
 
 ### Added
