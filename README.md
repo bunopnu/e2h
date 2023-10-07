@@ -31,7 +31,7 @@ Here's a simple example of how to use `e2h` to generate an HTML document in Erla
 ```erlang
 UserStatus = <<"busy">>,
 UserProfileImage = <<"https://example.com/image.jpeg">>,
-UserName = <<"joe">>,
+UserName = <<"bob">>,
 UserJob = <<"data scientist">>,
 
 Document = [
@@ -50,7 +50,7 @@ e2h:render_fragment(Document).
 % <div class="user" status="busy">
 %   <img href="https://example.com/image.jpeg" />
 %   <div>
-%     <h1>joe</h1>
+%     <h1>bob</h1>
 %     <p>data scientist</p>
 %   </div>
 % </div>

@@ -6,6 +6,9 @@
 %%% HTML structures without the need for extensive specifications.
 %%%-----------------------------------------------------------------------------
 
+%% Simplifies the creation of an HTML document structure
+-define(eHTML(X, Y), [{<<"html">>, [], [{<<"head">>, [], X}, {<<"body">>, [], Y}]}]).
+
 %% Macro Definitions for Headings
 -define(eH1(X), {<<"h1">>, [], X}).
 -define(eH2(X), {<<"h2">>, [], X}).

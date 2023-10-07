@@ -28,7 +28,7 @@ simple_render_test() ->
         {button, [disabled], [<<"More">>]}
     ],
 
-    Rendered1 = e2h:render(Elements),
+    Rendered1 = e2h:render_fragment(Elements),
     Expected1 =
         <<"<div class=\"test\"><h1>Hello, World!</h1><img src=\"https://example.com/image.png\" /></div><button disabled>More</button>">>,
     ?assertEqual(Expected1, Rendered1),
@@ -38,18 +38,27 @@ simple_render_test() ->
     ?assertEqual(Expected2, Rendered2).
 
 html_macros_render_test() ->
-    Elements = [
-        ?eDiv([
-            ?eH1([<<"Hello, World!">>]),
-            ?eSpan([
-                ?eP([<<"Long Story...">>]),
-                ?eA(<<"https://bun.rip">>, [<<"Visit My Website!">>])
-            ]),
-            <<"End of the content!">>
-        ])
-    ],
+    Document = ?eHTML(
+        [
+            {title, [], [<<"hello!">>]}
+        ],
+        [
+            ?eDiv([
+                ?eH1([<<"Hello, World!">>]),
+                ?eSpan([
+                    ?eP([<<"Long Story...">>]),
+                    ?eA(<<"https://bun.rip">>, [<<"Visit My Website!">>])
+                ]),
+                <<"End of the content!">>
+            ])
+        ]
+    ),
 
-    Rendered1 = e2h:render(Elements),
-    Expected1 =
-        <<"<div><h1>Hello, World!</h1><span><p>Long Story...</p><a href=\"https://bun.rip\">Visit My Website!</a></span>End of the content!</div>">>,
+    Rendered1 = e2h:render_html(Document),
+    Expected1 = list_to_binary(
+        "<!DOCTYPE html>\n<html>"
+        "<head><title>hello!</title></head>"
+        "<body><div><h1>Hello, World!</h1><span><p>Long Story...</p><a href=\"https://bun.rip\">Visit My Website!</a></span>End of the content!</div></body>"
+        "</html>"
+    ),
     ?assertEqual(Expected1, Rendered1).
