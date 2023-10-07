@@ -4,6 +4,16 @@ This changelog documents all noteworthy changes in the project. The format adher
 
 ## Next
 
+## v0.4.0 - 7th October 2023
+
+### Added
+
+- New macro `eHTML/2` for simplifying the creation of an HTML document structure.
+
+### Changed
+
+- Renamed the `render/1` function to `render_fragment/1` for clarity.
+
 ## v0.3.2 - 2nd October 2023
 
 ### Added
