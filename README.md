@@ -44,7 +44,7 @@ Document = [
   ]}
 ],
 
-e2h:render(Document).
+e2h:render_fragment(Document).
 % (output is manually formatted for readme)
 %
 % <div class="user" status="busy">

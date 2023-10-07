@@ -10,7 +10,7 @@
 %%%-----------------------------------------------------------------------------
 -module(e2h).
 
--export([render_html/1, render/1, escape/1]).
+-export([render_html/1, render_fragment/1, escape/1]).
 -export_type([key/0, attributes/0, elements/0]).
 
 %%%=============================================================================
@@ -52,7 +52,7 @@
 %%%=============================================================================
 
 %%------------------------------------------------------------------------------
-%% @doc Similar to {@link render/1}, with a DOCTYPE declaration.
+%% @doc Similar to {@link render_fragment/1}, with a DOCTYPE declaration.
 %% @end
 %%------------------------------------------------------------------------------
 -spec render_html(elements()) -> binary().
@@ -71,8 +71,8 @@ render_html(Elements) when is_list(Elements) ->
 %%
 %% @end
 %%------------------------------------------------------------------------------
--spec render(elements()) -> binary().
-render(Elements) when is_list(Elements) ->
+-spec render_fragment(elements()) -> binary().
+render_fragment(Elements) when is_list(Elements) ->
     encode_elements(Elements, <<>>).
 
 %%------------------------------------------------------------------------------
