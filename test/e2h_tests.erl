@@ -22,10 +22,10 @@ escape_test() ->
 simple_render_test() ->
     Elements = [
         {<<"div">>, [{<<"class">>, <<"test">>}], [
-            {h1, [], [<<"Hello, World!">>]},
-            {img, [{src, <<"https://example.com/image.png">>}]}
+            {<<"h1">>, [], [<<"Hello, World!">>]},
+            {<<"img">>, [{<<"src">>, <<"https://example.com/image.png">>}]}
         ]},
-        {button, [disabled], [<<"More">>]}
+        {<<"button">>, [<<"disabled">>], [<<"More">>]}
     ],
 
     Rendered1 = e2h:render_fragment(Elements),
@@ -40,7 +40,7 @@ simple_render_test() ->
 html_macros_render_test() ->
     Document = ?eHTML(
         [
-            {title, [], [<<"hello!">>]}
+            {<<"title">>, [], [<<"hello!">>]}
         ],
         [
             ?eDiv([
