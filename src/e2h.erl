@@ -23,7 +23,7 @@
 %% == Example ==
 %%
 %% ```
-%% Attributes = [{<<"type">>, <<"password">>}, {id, <<"my-element">>}, disabled].
+%% Attributes = [{<<"type">>, <<"password">>}, {<<"id">>, <<"my-element">>}, <<"disabled">>].
 %% % Represents attributes like: type="password" id="my-element" disabled
 %% '''
 %%
@@ -38,7 +38,7 @@
 %%  {<<"div">>, [{<<"class">>, <<"container">>}], [
 %%    {<<"p">>, [], [<<"This is a paragraph.">>]},
 %%    {<<"a">>, [{<<"href">>, <<"#">>}], [<<"Click me">>]},
-%%    {img, [{src, <<"https://example.com/image.png">>}]}
+%%    {<<"img">>, [{<<"src">>, <<"https://example.com/image.png">>}]}
 %%  ]}
 %% ].
 %% '''
