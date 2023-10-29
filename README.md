@@ -1,6 +1,9 @@
 # e2h
 
-`e2h` is an Erlang module designed to generate HTML content within the Erlang. It provides functions for encoding HTML elements and attributes, as well as escaping suspicious characters within HTML content. This module is suitable for developers who need to programmatically generate HTML documents or elements in their Erlang applications.
+`e2h` (Erlang to HTML) is an Erlang module designed to generate HTML content within the Erlang.
+It provides functions for encoding HTML elements and attributes, as well as escaping dangerous characters within HTML content.
+
+This module is suitable for developers who need to programmatically generate HTML documents or elements in their Erlang applications.
 
 [![Test Status](https://github.com/bunopnu/fresh/actions/workflows/test.yml/badge.svg)](https://github.com/bunopnu/fresh/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/bunopnu/e2h/badge.svg?branch=main)](https://coveralls.io/github/bunopnu/e2h)
@@ -10,18 +13,8 @@
 
 Package can be installed by adding `e2h` to your list of dependencies:
 
-### With Rebar3
-
 ```erlang
-{deps, [{e2h, "0.4.0"}]}.
-```
-
-### With Mix
-
-```elixir
-defp deps do
-  [{:e2h, "~> 0.4.0"}]
-end
+{deps, [{e2h, "0.4.1"}]}.
 ```
 
 ## Usage Example
@@ -35,11 +28,11 @@ UserName = <<"bob">>,
 UserJob = <<"data scientist">>,
 
 Document = [
-  {'div', [{class, <<"user">>}, {status, UserStatus}], [
-    {img, [{href, UserProfileImage}]},
-    {'div', [], [
-      {h1, [], [UserName]},
-      {p, [], [UserJob]}
+  {<<"div">>, [{<<"class">>, <<"user">>}, {<<"status">>, UserStatus}], [
+    {<<"img">>, [{<<"href">>, UserProfileImage}]},
+    {<<"div">>, [], [
+      {<<"h1">>, [], [UserName]},
+      {<<"p">>, [], [UserJob]}
     ]}
   ]}
 ],
