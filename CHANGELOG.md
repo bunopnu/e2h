@@ -2,6 +2,12 @@
 
 ## Next
 
+## v0.4.2 - 23rd April 2024
+
+### Added
+
+- New macro `eTitle/1`.
+
 ## v0.4.1 - 29th October 2023
 
 ### Changed

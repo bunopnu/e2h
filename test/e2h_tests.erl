@@ -40,7 +40,7 @@ simple_render_test() ->
 
 html_macros_render_test() ->
     Document = ?eHTML(
-                 [{<<"title">>, [], [<<"hello!">>]}],
+                 [?eTitle([<<"hello!">>])],
                  [?eDiv([?eH1([<<"Hello, World!">>]),
                          ?eSpan([?eP([<<"Long Story...">>]),
                                  ?eA(<<"https://bun.rip">>, [<<"Visit My Website!">>])]),

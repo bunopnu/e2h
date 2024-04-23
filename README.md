@@ -14,7 +14,7 @@ This module is suitable for developers who need to programmatically generate HTM
 Package can be installed by adding `e2h` to your list of dependencies:
 
 ```erlang
-{deps, [{e2h, "0.4.1"}]}.
+{deps, [{e2h, "0.4.2"}]}.
 ```
 
 ## Usage Example

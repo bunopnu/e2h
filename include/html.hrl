@@ -35,6 +35,7 @@
 -define(eHead(X), {<<"head">>, [], X}).
 -define(eHeader(X), {<<"header">>, [], X}).
 -define(eSummary(X), {<<"summary">>, [], X}).
+-define(eTitle(X), {<<"title">>, [], X}).
 
 %% Macro Definitions for Line Breaks and Horizontal Rules
 -define(eBr(), {<<"br">>}).
