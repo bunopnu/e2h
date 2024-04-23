@@ -48,6 +48,7 @@
 %%% Public functions
 %%%=============================================================================
 
+
 %%------------------------------------------------------------------------------
 %% @doc Similar to {@link render_fragment/1}, with a DOCTYPE declaration.
 %% @end
@@ -55,6 +56,7 @@
 -spec render_html(elements()) -> binary().
 render_html(Elements) when is_list(Elements) ->
     encode_elements(Elements, <<"<!DOCTYPE html>\n">>).
+
 
 %%------------------------------------------------------------------------------
 %% @doc Renders a list of structure into a binary representation of an
@@ -71,6 +73,7 @@ render_html(Elements) when is_list(Elements) ->
 -spec render_fragment(elements()) -> binary().
 render_fragment(Elements) when is_list(Elements) ->
     encode_elements(Elements, <<>>).
+
 
 %%------------------------------------------------------------------------------
 %% @doc Escapes dangerous HTML characters within a binary data input.
@@ -95,9 +98,11 @@ render_fragment(Elements) when is_list(Elements) ->
 escape(Data) when is_binary(Data) ->
     escape(Data, <<>>).
 
+
 %%%=============================================================================
 %%% Private functions
 %%%=============================================================================
+
 
 -spec escape(binary(), binary()) -> binary().
 escape(<<$<, Tail/binary>>, Acc) ->
@@ -115,9 +120,11 @@ escape(<<Head, Tail/binary>>, Acc) ->
 escape(<<>>, Acc) ->
     Acc.
 
+
 -spec encode_attributes(attributes()) -> binary().
 encode_attributes(Attributes) when is_list(Attributes) ->
     encode_attributes(Attributes, <<>>).
+
 
 -spec encode_attributes(attributes(), binary()) -> binary().
 encode_attributes([{Key, Value} | Tail], Acc) when is_binary(Key), is_binary(Value) ->
@@ -127,9 +134,11 @@ encode_attributes([Key | Tail], Acc) when is_binary(Key) ->
 encode_attributes([], Acc) ->
     Acc.
 
+
 -spec encode_elements(elements()) -> binary().
 encode_elements(Elements) when is_list(Elements) ->
     encode_elements(Elements, <<>>).
+
 
 -spec encode_elements(elements(), binary()) -> binary().
 encode_elements([Raw | Tail], Acc) when is_binary(Raw) ->
@@ -139,10 +148,9 @@ encode_elements([{Tag, Attributes, Value} | Tail], Acc) when is_binary(Tag) ->
     EncodedValue = encode_elements(Value),
 
     encode_elements(
-        Tail,
-        <<Acc/binary, $<, Tag/binary, EncodedAttributes/binary, $>, EncodedValue/binary, "</",
-            Tag/binary, $>>>
-    );
+      Tail,
+      <<Acc/binary, $<, Tag/binary, EncodedAttributes/binary, $>, EncodedValue/binary, "</",
+        Tag/binary, $>>>);
 encode_elements([{Tag, Attributes} | Tail], Acc) when is_binary(Tag) ->
     EncodedAttributes = encode_attributes(Attributes),
     encode_elements(Tail, <<Acc/binary, $<, Tag/binary, EncodedAttributes/binary, " />">>);

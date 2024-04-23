@@ -5,7 +5,7 @@ It provides functions for encoding HTML elements and attributes, as well as esca
 
 This module is suitable for developers who need to programmatically generate HTML documents or elements in their Erlang applications.
 
-[![Test Status](https://github.com/bunopnu/fresh/actions/workflows/test.yml/badge.svg)](https://github.com/bunopnu/fresh/actions/workflows/test.yml)
+[![Test Status](https://github.com/bunopnu/e2h/actions/workflows/test.yml/badge.svg)](https://github.com/bunopnu/e2h/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/bunopnu/e2h/badge.svg?branch=main)](https://coveralls.io/github/bunopnu/e2h)
 [![Hex Version](https://img.shields.io/hexpm/v/e2h.svg)](https://hex.pm/packages/e2h)
 

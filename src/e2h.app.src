@@ -1,14 +1,11 @@
-{application, e2h, [
-    {description, "HTML generator for Erlang ecosystem"},
-    {vsn, "0.4.1"},
-    {registered, []},
-    {applications, [
-        kernel,
-        stdlib
-    ]},
-    {env, []},
-    {modules, []},
+{application, e2h,
+ [{description, "HTML generator for Erlang ecosystem"},
+  {vsn, "0.4.1"},
+  {registered, []},
+  {applications, [kernel,
+                  stdlib]},
+  {env, []},
+  {modules, []},
 
-    {licenses, ["MIT"]},
-    {links, [{"GitHub", "https://github.com/bunopnu/e2h"}]}
-]}.
+  {licenses, ["MIT"]},
+  {links, [{"GitHub", "https://github.com/bunopnu/e2h"}]}]}.
