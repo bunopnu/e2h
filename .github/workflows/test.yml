@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        otp: ["26.1.2", "25.3.2.7"]
+        otp: ["26.2.4", "25.3.2.11"]
 
     steps:
       - uses: actions/checkout@v4
